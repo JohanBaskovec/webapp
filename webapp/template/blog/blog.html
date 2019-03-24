@@ -1,0 +1,40 @@
+<h1>Blog home</h1>
+{{ for article in articles }}
+<h2>{{ article.Title }}</h2>
+<p>{{ article.Content }}</p>
+{{ end }}
+
+<h1>Publish a new blog </h1>
+<form method="post" action="/blog">
+    <label>
+        Title
+        <input type="text" id="Title" name="Title" value='{{ flashMessages["BlogArticleForm.Title"] }}'/>
+    </label>
+    <div>
+        <div>
+            <ul>
+                {{ for error in flashMessageLists["formValidationErrors.BlogArticleForm.Title"] }}
+                <li>
+                    {{ error }}
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+    <label>
+        Content
+        <textarea id="Content" name="Content">{{ flashMessages["BlogArticleForm.Content"] }}</textarea>
+    </label>
+    <div>
+        <div>
+            <ul>
+                {{ for error in flashMessageLists["formValidationErrors.BlogArticleForm.Content"] }}
+                <li>
+                    {{ error }}
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+    <button>Submit</button>
+</form>

@@ -1,0 +1,4 @@
+reloadTemplates: true
+displayExceptions: true 
+templatesDirectory: /home/johan/RiderProjects/webapp/webapp/template
+postgresConnectionString: Host=localhost;Username=postgres;Password=c4ef37c0fbd747da1c63c0f87d7c62df;Database=test;Port=5432
