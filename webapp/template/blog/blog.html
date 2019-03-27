@@ -1,7 +1,9 @@
 <h1>Blog home</h1>
 {{ for article in articles }}
-<h2>{{ article.Title }}</h2>
-<p>{{ article.Content }}</p>
+<div class="article">
+    <h2 class="article-title">{{ article.Title }}</h2>
+    <p class="article-content">{{ article.Content }}</p>
+</div>
 {{ end }}
 
 {{ for $i in 0..(nPages - 1)}}
@@ -40,5 +42,5 @@
             </ul>
         </div>
     </div>
-    <button>Submit</button>
+    <button id="submit-button">Submit</button>
 </form>
