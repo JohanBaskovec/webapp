@@ -10,15 +10,20 @@ namespace webapp.blog
 
         public static void Get(RequestContext context)
         {
+            HttpRequest request = context.Request;
+            string pageString = request.QueryString["page"];
+            
+            int page = pageString == null ? 0 : int.Parse(request.QueryString["page"]);
             HttpResponse response = context.Response;
             BlogRepository blogRepository = context.BlogRepository;
-            List<BlogArticle> articles = blogRepository.GetAll();
-
+            List<BlogArticle> articles = blogRepository.GetAll(page);
+            int nPages = blogRepository.CountPages();
             response.RenderHtml("template.html", new ScriptObject
             {
                 { "articles", articles },
                 { "templateName", "blog/blog.html" },
-                { "title", "Blog" }
+                { "title", "Blog" },
+                { "nPages", nPages }
             });
         }
 

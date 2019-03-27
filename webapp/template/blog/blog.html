@@ -4,6 +4,10 @@
 <p>{{ article.Content }}</p>
 {{ end }}
 
+{{ for $i in 0..(nPages - 1)}}
+    <a href="?page={{$i}}">{{$i}}</a>
+{{ end }}
+
 <h1>Publish a new blog </h1>
 <form method="post" action="/blog">
     <label>
