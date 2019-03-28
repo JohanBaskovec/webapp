@@ -22,7 +22,7 @@ namespace webapp
         public void RenderHtml(string templateName, ScriptObject model)
         { 
             model["flashMessageLists"] = _context.Session.FlashMessageLists;
-            model["flashMessages"] = _context.Session.FlashMessages;
+            model["flashMessages"] = _context.Session.Flash;
             ResponseString = _templateProvider.Render(templateName, model);
         }
 

@@ -13,6 +13,9 @@ namespace webapp.blog
         {
             get; set;
         }
+        
+        [Bound]
+        public string Id { get; set; }
 
         public BlogArticleForm(NameValueCollection requestBody) : base(requestBody)
         {

@@ -1,0 +1,36 @@
+{{ flashMessages["confirmation"] }}
+
+<form method="post" action="/blog">
+    <label>
+        Title
+        <input type="text" id="Title" name="Title" value='{{ form.Title }}'/>
+    </label>
+    <div>
+        <div>
+            <ul>
+                {{ for error in form.Errors["Title"] }}
+                <li>
+                    {{ error }}
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+    <label>
+        Content
+        <textarea id="Content" name="Content">{{ form.Content }}</textarea>
+    </label>
+    <div>
+        <div>
+            <ul>
+                {{ for error in form.Errors["Content"] }}
+                <li>
+                    {{ error }}
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+    <input type="hidden" value='{{ form.Id }}' name="Id" id="Id" />
+    <button>Submit</button>
+</form>

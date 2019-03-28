@@ -6,4 +6,9 @@ namespace webapp
     {
         public static string ErrorString = "form.validation.errors.NotEmpty";
     }
+
+    public class BoundAttribute : Attribute
+    {
+        
+    }
 }

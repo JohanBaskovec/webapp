@@ -56,16 +56,21 @@ namespace webapp.form
         {           
             string typeString = _type.Name;
             
+            /*
             foreach ((string key, List<string> value) in Errors)
             {
                 session.AddFlashMessagesToList("formValidationErrors." + typeString + "." + key, value);
             }
+            */
 
+            session.AddFlash("form", this);
+            /*
             foreach (PropertyInfo propertyInfo in _members)
             {
-                session.AddFlashMessage(typeString + "." + propertyInfo.Name, 
+                session.AddFlash(typeString + "." + propertyInfo.Name, 
                     propertyInfo.GetValue(this).ToString());
             }
+            */
         }
 
         private void ValidateAttributes(object[] myAttributes, PropertyInfo fieldInfo)

@@ -34,13 +34,15 @@ namespace webapp
 
             DbConnectionFactory dbConnectionFactory = new DbConnectionFactory(options.PostgresConnectionString);
             HttpListener listener = new HttpListener();
-            listener.Prefixes.Add("http://*:8080/");
+            listener.Prefixes.Add("http://localhost:8085/");
             listener.Start();
             Console.WriteLine("Server started.");
 
             Router router = new Router();
             router.AddGetRoute(@"^/blog(\?.*|$)", BlogController.Get);
             router.AddPostRoute(@"^/blog(\?.*|$)", BlogController.Post);
+            router.AddGetRoute(@"^/blog/edition(\?.*|$)", BlogController.Edit);
+
 
             while (true)
             {

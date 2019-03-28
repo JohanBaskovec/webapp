@@ -6,7 +6,7 @@ namespace webapp
     {
         public string Id { get; set; }
         private readonly Dictionary<string, List<string>> _flashMessageLists = new Dictionary<string, List<string>>();
-        private readonly Dictionary<string, string> _flashMessages = new Dictionary<string, string>();
+        private readonly Dictionary<string, object> _flash = new Dictionary<string, object>();
 
         
         public Dictionary<string, List<string>> FlashMessageLists
@@ -44,19 +44,19 @@ namespace webapp
             }
         }       
         
-        public Dictionary<string, string> FlashMessages
+        public Dictionary<string, object> Flash
         {
             get
             {
-                Dictionary<string, string> flashMessagesClone = new Dictionary<string, string>(_flashMessages);
-                _flashMessages.Clear();
+                Dictionary<string, object> flashMessagesClone = new Dictionary<string, object>(_flash);
+                _flash.Clear();
                 return flashMessagesClone;
             }
         }
                        
-        public void AddFlashMessage(string key, string message)
+        public void AddFlash(string key, object flash)
         {
-            _flashMessages[key] = message;
+            _flash[key] = flash;
         }
     }
 }

@@ -43,6 +43,28 @@ namespace webapp
             return ret;
         }
 
+        public BlogArticle GetById(int id)
+        {
+            Logger.Info("Getting all articles.");
+            using (NpgsqlCommand cmd = _dbConnection.CreateCommand())
+            {
+                cmd.CommandText =
+                    $"select id, title, content from article where id = @id";
+                cmd.Parameters.AddWithValue("id", NpgsqlDbType.Integer, id);
+                cmd.Prepare();
+                using (DbDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        BlogArticle article = CreateArticleFromDbRow(reader);
+                        return article;
+                    }
+                }
+            } 
+
+            return null;
+        }
+        
         public int CountPages()
         {
             using (DbCommand cmd = _dbConnection.CreateCommand())
@@ -82,11 +104,15 @@ namespace webapp
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = _dbConnection.NpgsqlConnection;
-                    cmd.CommandText = "insert into article (title, content) values(@title, @content)";
+                    cmd.CommandText = "insert into article (title, content) values(@title, @content) returning id";
                     cmd.Parameters.AddWithValue("title", NpgsqlDbType.Text, article.Title);
                     cmd.Parameters.AddWithValue("content", NpgsqlDbType.Text, article.Content);
                     cmd.Prepare();
-                    cmd.ExecuteNonQuery();
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        reader.Read();
+                        article.Id = reader.GetInt32(0);
+                    }
                 }
             }
             else
